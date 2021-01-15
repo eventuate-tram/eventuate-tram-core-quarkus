@@ -1,0 +1,17 @@
+plugins {
+    id "io.quarkus" version "${quarkusVersion}"
+    id 'org.kordamp.gradle.jandex' version '0.6.0'
+}
+
+apply plugin: PublicModulePlugin
+
+dependencies {
+    compile project(":eventuate-tram-quarkus-messaging")
+    compile project(":eventuate-tram-quarkus-messaging-producer-common")
+
+    compile "io.eventuate.tram.core:eventuate-tram-producer-jdbc:$eventuateTramVersion"
+
+    compile "io.eventuate.common:eventuate-common-quarkus-id:$eventuateCommonQuarkusVersion"
+    compile "io.eventuate.common:eventuate-common-quarkus-jdbc:$eventuateCommonQuarkusVersion"
+}
+

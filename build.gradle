@@ -1,0 +1,80 @@
+buildscript {
+    repositories {
+        jcenter()
+        eventuateMavenRepoUrl.split(',').each { repoUrl -> maven { url repoUrl } }
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
+        classpath "io.eventuate.plugins.gradle:eventuate-plugins-gradle-versions:$eventuatePluginsGradleVersion"
+        classpath "io.eventuate.plugins.gradle:eventuate-plugins-gradle-publish:$eventuatePluginsGradleVersion"
+        classpath "com.avast.gradle:gradle-docker-compose-plugin:0.12.0"
+    }
+}
+
+apply plugin: 'docker-compose'
+
+allprojects {
+    group = "io.eventuate.tram.core"
+}
+
+apply plugin: "io.eventuate.plugins.gradle.publish.EventuatePublish"
+
+allprojects {
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+        jcenter()
+        eventuateMavenRepoUrl.split(',').each { repoUrl -> maven { url repoUrl } }
+    }
+
+    if (!project.name.endsWith("-bom")) {
+
+      dependencies {
+          testCompile "junit:junit:4.12"
+          testCompile "org.mockito:mockito-core:2.23.4"
+
+          compile 'io.quarkus:quarkus-core'
+          compile 'io.quarkus.arc:arc'
+          compile 'io.quarkus:quarkus-arc-deployment'
+
+          implementation enforcedPlatform("io.quarkus:quarkus-bom:${quarkusVersion}")
+      }
+    }
+}
+
+
+gradle.projectsEvaluated {
+    task aggregateJavaDocs(type: Javadoc) {
+        description = 'Aggregated Javadoc API documentation of all subprojects.'
+        group = JavaBasePlugin.DOCUMENTATION_GROUP
+        dependsOn subprojects.findAll { subproject -> subproject.plugins.hasPlugin(PublicModulePlugin) }.javadoc
+
+        source subprojects.findAll { subproject -> subproject.plugins.hasPlugin(PublicModulePlugin) }.javadoc.source
+        destinationDir file("$buildDir/docs/javadoc")
+        classpath = files(subprojects.findAll { subproject -> subproject.plugins.hasPlugin(PublicModulePlugin) }.javadoc.classpath)
+    }
+
+    task("aggregateJavaDocsJar", type: org.gradle.api.tasks.bundling.Jar, dependsOn: project.aggregateJavaDocs) {
+        classifier = 'javadoc'
+        from 'build/docs/javadoc'
+    }
+
+    artifacts {
+        archives project.aggregateJavaDocsJar
+    }
+
+}
+
+dockerCompose {
+    environment.put "EVENTUATE_COMMON_VERSION", eventuateCommonImageVersion
+
+    removeOrphans = true
+
+    mysql {
+        projectName = null
+        useComposeFiles = ["docker-compose-mysql.yml"]
+    }
+}
