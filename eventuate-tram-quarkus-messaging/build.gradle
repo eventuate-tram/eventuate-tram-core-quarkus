@@ -1,0 +1,8 @@
+plugins {
+    id "io.quarkus" version "${quarkusVersion}"
+    id 'org.kordamp.gradle.jandex' version '0.6.0'
+}
+
+dependencies {
+    compile "io.eventuate.tram.core:eventuate-tram-messaging:$eventuateTramVersion"
+}
