@@ -8,14 +8,13 @@ import io.eventuate.tram.consumer.common.DuplicateMessageDetector;
 import io.eventuate.tram.consumer.jdbc.SqlTableBasedDuplicateMessageDetector;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
+import javax.inject.Singleton;
 import java.util.Optional;
 
-@ApplicationScoped
+@Singleton
 public class TramConsumerJdbcConfiguration {
 
-  @Produces
+  @Singleton
   public DuplicateMessageDetector duplicateMessageDetector(@ConfigProperty(name = "eventuateDatabase") String dbName,
                                                            EventuateSchema eventuateSchema,
                                                            SqlDialectSelector sqlDialectSelector,

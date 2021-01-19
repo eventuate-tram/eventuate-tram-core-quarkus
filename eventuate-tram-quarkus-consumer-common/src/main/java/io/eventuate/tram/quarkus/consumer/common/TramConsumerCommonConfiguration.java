@@ -6,14 +6,13 @@ import io.eventuate.tram.consumer.common.MessageConsumerImplementation;
 import io.eventuate.tram.messaging.common.ChannelMapping;
 import io.eventuate.tram.messaging.consumer.MessageConsumer;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Instance;
-import javax.enterprise.inject.Produces;
+import javax.inject.Singleton;
 
-@ApplicationScoped
+@Singleton
 public class TramConsumerCommonConfiguration {
 
-  @Produces
+  @Singleton
   public MessageConsumer messageConsumer(Instance<MessageConsumerImplementation> messageConsumerImplementation,
                                          Instance<ChannelMapping> channelMapping,
                                          DecoratedMessageHandlerFactory decoratedMessageHandlerFactory) {

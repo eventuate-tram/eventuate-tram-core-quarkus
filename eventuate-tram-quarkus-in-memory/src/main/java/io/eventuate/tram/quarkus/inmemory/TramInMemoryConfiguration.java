@@ -4,12 +4,11 @@ import io.eventuate.common.inmemorydatabase.EventuateDatabaseScriptSupplier;
 import io.eventuate.tram.inmemory.InMemoryMessageConsumer;
 import io.eventuate.tram.inmemory.InMemoryMessageProducer;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import java.util.Collections;
 
-@ApplicationScoped
+@Singleton
 public class TramInMemoryConfiguration {
 
   @Singleton

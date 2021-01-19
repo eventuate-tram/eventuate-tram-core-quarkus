@@ -6,14 +6,13 @@ import io.eventuate.tram.messaging.producer.MessageProducer;
 import io.eventuate.tram.messaging.producer.common.MessageProducerImpl;
 import io.eventuate.tram.messaging.producer.common.MessageProducerImplementation;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Instance;
-import javax.enterprise.inject.Produces;
+import javax.inject.Singleton;
 import java.util.stream.Collectors;
 
-@ApplicationScoped
+@Singleton
 public class TramMessagingCommonProducerConfiguration {
-  @Produces
+  @Singleton
   public MessageProducer messageProducer(Instance<MessageInterceptor> messageInterceptors,
                                          Instance<ChannelMapping> channelMapping,
                                          Instance<MessageProducerImplementation> implementation) {

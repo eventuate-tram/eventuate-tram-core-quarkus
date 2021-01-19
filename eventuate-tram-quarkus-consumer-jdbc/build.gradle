@@ -9,7 +9,8 @@ dependencies {
     compile "io.eventuate.tram.core:eventuate-tram-consumer-jdbc:$eventuateTramVersion"
 
     compile "io.eventuate.common:eventuate-common-quarkus-jdbc:$eventuateCommonQuarkusVersion"
-    compile "io.eventuate.common:eventuate-common-quarkus-jdbc-test-configuration:$eventuateCommonQuarkusVersion"
+
+    testCompile "io.eventuate.common:eventuate-common-quarkus-jdbc-test-configuration:$eventuateCommonQuarkusVersion"
 
     testCompile 'io.quarkus:quarkus-junit5'
 }

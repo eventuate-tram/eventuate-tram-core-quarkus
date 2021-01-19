@@ -4,13 +4,12 @@ import io.eventuate.tram.messaging.common.ChannelMapping;
 import io.eventuate.tram.messaging.common.DefaultChannelMapping;
 import io.quarkus.arc.DefaultBean;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
+import javax.inject.Singleton;
 
-@ApplicationScoped
+@Singleton
 public class TramMessagingCommonConfiguration {
 
-  @Produces
+  @Singleton
   @DefaultBean
   public ChannelMapping channelMapping() {
     return new DefaultChannelMapping.DefaultChannelMappingBuilder().build();

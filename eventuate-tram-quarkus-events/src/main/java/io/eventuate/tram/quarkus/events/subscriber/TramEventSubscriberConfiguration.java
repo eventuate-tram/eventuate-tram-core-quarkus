@@ -4,13 +4,12 @@ import io.eventuate.tram.events.common.DomainEventNameMapping;
 import io.eventuate.tram.events.subscriber.DomainEventDispatcherFactory;
 import io.eventuate.tram.messaging.consumer.MessageConsumer;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
+import javax.inject.Singleton;
 
-@ApplicationScoped
+@Singleton
 public class TramEventSubscriberConfiguration {
 
-  @Produces
+  @Singleton
   public DomainEventDispatcherFactory domainEventDispatcherFactory(MessageConsumer messageConsumer, DomainEventNameMapping domainEventNameMapping) {
     return new DomainEventDispatcherFactory(messageConsumer, domainEventNameMapping);
   }

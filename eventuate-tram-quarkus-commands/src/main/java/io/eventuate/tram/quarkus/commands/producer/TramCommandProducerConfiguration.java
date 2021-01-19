@@ -4,12 +4,11 @@ import io.eventuate.tram.commands.producer.CommandProducer;
 import io.eventuate.tram.commands.producer.CommandProducerImpl;
 import io.eventuate.tram.messaging.producer.MessageProducer;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
+import javax.inject.Singleton;
 
-@ApplicationScoped
+@Singleton
 public class TramCommandProducerConfiguration {
-  @Produces
+  @Singleton
   public CommandProducer commandProducer(MessageProducer messageProducer) {
     return new CommandProducerImpl(messageProducer);
   }
