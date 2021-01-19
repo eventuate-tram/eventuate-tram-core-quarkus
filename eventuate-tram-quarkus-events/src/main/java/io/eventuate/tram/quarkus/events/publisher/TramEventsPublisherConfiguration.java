@@ -5,13 +5,12 @@ import io.eventuate.tram.events.publisher.DomainEventPublisher;
 import io.eventuate.tram.events.publisher.DomainEventPublisherImpl;
 import io.eventuate.tram.messaging.producer.MessageProducer;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
+import javax.inject.Singleton;
 
-@ApplicationScoped
+@Singleton
 public class TramEventsPublisherConfiguration {
 
-  @Produces
+  @Singleton
   public DomainEventPublisher domainEventPublisher(MessageProducer messageProducer, DomainEventNameMapping domainEventNameMapping) {
     return new DomainEventPublisherImpl(messageProducer, domainEventNameMapping);
   }

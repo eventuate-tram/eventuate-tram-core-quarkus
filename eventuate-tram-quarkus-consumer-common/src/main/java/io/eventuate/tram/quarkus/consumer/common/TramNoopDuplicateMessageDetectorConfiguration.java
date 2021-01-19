@@ -4,13 +4,12 @@ import io.eventuate.tram.consumer.common.DuplicateMessageDetector;
 import io.eventuate.tram.consumer.common.NoopDuplicateMessageDetector;
 import io.quarkus.arc.DefaultBean;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
+import javax.inject.Singleton;
 
-@ApplicationScoped
+@Singleton
 public class TramNoopDuplicateMessageDetectorConfiguration {
 
-  @Produces
+  @Singleton
   @DefaultBean
   public DuplicateMessageDetector duplicateMessageDetector() {
     return new NoopDuplicateMessageDetector();

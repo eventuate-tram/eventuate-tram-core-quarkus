@@ -4,12 +4,11 @@ import io.eventuate.messaging.kafka.consumer.MessageConsumerKafkaImpl;
 import io.eventuate.tram.consumer.common.MessageConsumerImplementation;
 import io.eventuate.tram.consumer.kafka.EventuateTramKafkaMessageConsumer;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
+import javax.inject.Singleton;
 
-@ApplicationScoped
+@Singleton
 public class EventuateTramKafkaMessageConsumerConfiguration {
-  @Produces
+  @Singleton
   public MessageConsumerImplementation messageConsumerImplementation(MessageConsumerKafkaImpl messageConsumerKafka) {
     return new EventuateTramKafkaMessageConsumer(messageConsumerKafka);
   }

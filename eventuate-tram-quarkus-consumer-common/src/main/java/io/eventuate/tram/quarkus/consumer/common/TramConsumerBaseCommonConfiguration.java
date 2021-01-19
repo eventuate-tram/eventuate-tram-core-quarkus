@@ -3,30 +3,29 @@ package io.eventuate.tram.quarkus.consumer.common;
 import io.eventuate.tram.consumer.common.*;
 import io.eventuate.tram.messaging.common.MessageInterceptor;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Instance;
-import javax.enterprise.inject.Produces;
+import javax.inject.Singleton;
 import java.util.stream.Collectors;
 
-@ApplicationScoped
+@Singleton
 public class TramConsumerBaseCommonConfiguration {
 
-  @Produces
+  @Singleton
   public DecoratedMessageHandlerFactory subscribedMessageHandlerChainFactory(Instance<MessageHandlerDecorator> decorators) {
     return new DecoratedMessageHandlerFactory(decorators.stream().collect(Collectors.toList()));
   }
 
-  @Produces
+  @Singleton
   public PrePostReceiveMessageHandlerDecorator prePostReceiveMessageHandlerDecoratorDecorator(Instance<MessageInterceptor> messageInterceptors) {
     return new PrePostReceiveMessageHandlerDecorator(messageInterceptorInstanceToArray(messageInterceptors));
   }
 
-  @Produces
+  @Singleton
   public DuplicateDetectingMessageHandlerDecorator duplicateDetectingMessageHandlerDecorator(DuplicateMessageDetector duplicateMessageDetector) {
     return new DuplicateDetectingMessageHandlerDecorator(duplicateMessageDetector);
   }
 
-  @Produces
+  @Singleton
   public PrePostHandlerMessageHandlerDecorator prePostHandlerMessageHandlerDecorator(Instance<MessageInterceptor> messageInterceptors) {
     return new PrePostHandlerMessageHandlerDecorator(messageInterceptorInstanceToArray(messageInterceptors));
   }

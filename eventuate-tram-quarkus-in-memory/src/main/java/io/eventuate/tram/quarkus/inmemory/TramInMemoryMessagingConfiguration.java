@@ -6,11 +6,10 @@ import io.eventuate.tram.inmemory.InMemoryMessageProducer;
 import io.eventuate.tram.messaging.producer.common.MessageProducerImplementation;
 
 import javax.annotation.Priority;
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Alternative;
 import javax.inject.Singleton;
 
-@ApplicationScoped
+@Singleton
 @Alternative
 @Priority(0)
 public class TramInMemoryMessagingConfiguration {

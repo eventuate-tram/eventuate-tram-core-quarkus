@@ -6,13 +6,12 @@ import io.eventuate.common.jdbc.EventuateSchema;
 import io.eventuate.tram.messaging.producer.common.MessageProducerImplementation;
 import io.eventuate.tram.messaging.producer.jdbc.MessageProducerJdbcImpl;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
+import javax.inject.Singleton;
 
-@ApplicationScoped
+@Singleton
 public class TramMessageProducerJdbcConfiguration {
 
-  @Produces
+  @Singleton
   public MessageProducerImplementation messageProducerImplementation(EventuateCommonJdbcOperations eventuateCommonJdbcOperations,
                                                                      IdGenerator idGenerator,
                                                                      EventuateSchema eventuateSchema) {

@@ -4,13 +4,12 @@ import io.eventuate.tram.events.common.DefaultDomainEventNameMapping;
 import io.eventuate.tram.events.common.DomainEventNameMapping;
 import io.quarkus.arc.DefaultBean;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
+import javax.inject.Singleton;
 
-@ApplicationScoped
+@Singleton
 public class TramEventsCommonConfiguration {
 
-  @Produces
+  @Singleton
   @DefaultBean
   public DomainEventNameMapping domainEventNameMapping() {
     return new DefaultDomainEventNameMapping();

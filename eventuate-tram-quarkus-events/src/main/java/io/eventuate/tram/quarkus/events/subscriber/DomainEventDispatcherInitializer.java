@@ -1,15 +1,15 @@
 package io.eventuate.tram.quarkus.events.subscriber;
 
 import io.eventuate.tram.events.subscriber.DomainEventDispatcher;
+import io.quarkus.runtime.Startup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
-@ApplicationScoped
+@Startup
 public class DomainEventDispatcherInitializer {
   private Logger logger = LoggerFactory.getLogger(getClass());
 
