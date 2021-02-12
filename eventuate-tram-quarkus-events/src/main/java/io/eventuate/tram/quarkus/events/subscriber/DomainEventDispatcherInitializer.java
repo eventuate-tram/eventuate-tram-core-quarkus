@@ -8,8 +8,10 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 @Startup
+@Singleton
 public class DomainEventDispatcherInitializer {
   private Logger logger = LoggerFactory.getLogger(getClass());
 
