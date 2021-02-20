@@ -1,9 +1,14 @@
 package io.eventuate.tram.quarkus.inmemory;
 
 import io.eventuate.common.inmemorydatabase.EventuateDatabaseScriptSupplier;
+import io.eventuate.tram.consumer.common.DuplicateMessageDetector;
+import io.eventuate.tram.consumer.common.NoopDuplicateMessageDetector;
+import io.eventuate.tram.inmemory.EventuateTransactionSynchronizationManager;
 import io.eventuate.tram.inmemory.InMemoryMessageConsumer;
 import io.eventuate.tram.inmemory.InMemoryMessageProducer;
 
+import javax.annotation.Priority;
+import javax.enterprise.inject.Alternative;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import java.util.Collections;
@@ -17,8 +22,9 @@ public class TramInMemoryConfiguration {
   }
 
   @Singleton
-  public InMemoryMessageProducer inMemoryMessageProducer(InMemoryMessageConsumer messageConsumer) {
-    return new InMemoryMessageProducer(messageConsumer);
+  public InMemoryMessageProducer inMemoryMessageProducer(InMemoryMessageConsumer messageConsumer,
+                                                         EventuateTransactionSynchronizationManager eventuateTransactionSynchronizationManager) {
+    return new InMemoryMessageProducer(messageConsumer, eventuateTransactionSynchronizationManager);
   }
 
   @Singleton

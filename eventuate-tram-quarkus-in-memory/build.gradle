@@ -7,11 +7,11 @@ apply plugin: PublicModulePlugin
 
 dependencies {
     compile "io.eventuate.tram.core:eventuate-tram-in-memory:$eventuateTramVersion"
+    compile "io.eventuate.tram.core:eventuate-tram-in-memory-test:$eventuateTramVersion"
 
     compile project(":eventuate-tram-quarkus-messaging")
     compile project(":eventuate-tram-quarkus-consumer-common")
     compile project(":eventuate-tram-quarkus-messaging-producer-common")
-    compile project(":eventuate-tram-quarkus-consumer-jdbc")
 
     compile "io.eventuate.common:eventuate-common-quarkus-id:$eventuateCommonQuarkusVersion"
     compile "io.eventuate.common:eventuate-common-quarkus-in-memory-database:$eventuateCommonQuarkusVersion"
