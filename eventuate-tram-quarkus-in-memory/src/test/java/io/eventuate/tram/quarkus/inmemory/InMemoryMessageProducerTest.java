@@ -3,112 +3,115 @@ package io.eventuate.tram.quarkus.inmemory;
 import io.eventuate.common.jdbc.EventuateTransactionTemplate;
 import io.eventuate.tram.inmemory.InMemoryMessageConsumer;
 import io.eventuate.tram.inmemory.InMemoryMessageProducer;
+import io.eventuate.tram.inmemory.test.AbstractInMemoryMessageProducerTest;
 import io.eventuate.tram.messaging.common.Message;
+import io.eventuate.tram.messaging.consumer.MessageConsumer;
 import io.eventuate.tram.messaging.consumer.MessageHandler;
 import io.eventuate.tram.messaging.producer.MessageBuilder;
+import io.eventuate.tram.messaging.producer.MessageProducer;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
+import javax.transaction.TransactionManager;
 import java.util.Collections;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 @QuarkusTest
-public class InMemoryMessageProducerTest {
-
-  private String subscriberId;
-  private String destination;
-  private String payload;
-  private MyMessageHandler mh;
+public class InMemoryMessageProducerTest extends AbstractInMemoryMessageProducerTest {
+  @Inject
+  MessageProducer messageProducer;
 
   @Inject
-  InMemoryMessageProducer inMemoryMessageProducer;
+  MessageConsumer messageConsumer;
 
   @Inject
-  InMemoryMessageConsumer inMemoryMessageConsumer;
+  TransactionManager transactionManager;
 
-  @Inject
-  EventuateTransactionTemplate eventuateTransactionTemplate;
+  @Override
+  protected MessageProducer getMessageProducer() {
+    return messageProducer;
+  }
 
+  @Override
+  protected MessageConsumer getMessageConsumer() {
+    return messageConsumer;
+  }
 
-  class MyMessageHandler implements MessageHandler {
+  @Override
+  protected void executeInTransaction(Consumer<Runnable> consumer) {
+    try {
+      transactionManager.begin();
 
-    private BlockingQueue<String> queue = new LinkedBlockingDeque<>();
+      AtomicBoolean rollback = new AtomicBoolean(false);
 
-    @Override
-    public void accept(Message message) {
-      try {
-        queue.put(message.getPayload());
-      } catch (InterruptedException e) {
-        throw new RuntimeException(e);
+      consumer.accept(() -> {
+          rollback.set(true);
+      });
+
+      if (rollback.get()) {
+        transactionManager.rollback();
+      } else {
+        transactionManager.commit();
       }
-    }
 
-    void shouldReceiveMessage(String payload) {
-      String m;
-      try {
-        while ((m = queue.poll(1, TimeUnit.SECONDS)) != null) {
-          if (payload.equals(m))
-            return;
-        }
-        fail("Didn't find message with payload: " + payload);
-      } catch (InterruptedException e) {
-        throw new RuntimeException(e);
-      }
+    } catch (NotSupportedException | SystemException | RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
+      throw new RuntimeException(e);
     }
   }
 
+  @Override
   @BeforeEach
   public void setUp() {
-    subscriberId = "subscriberId-" + System.currentTimeMillis();
-    destination = "destination-" + System.currentTimeMillis();
-    payload = "payload-" + System.currentTimeMillis();
-    mh = new MyMessageHandler();
+    super.setUp();
   }
 
+  @Override
   @Test
   public void shouldDeliverToMatchingSubscribers() {
-
-    inMemoryMessageConsumer.subscribe(subscriberId, Collections.singleton(destination), mh);
-
-    Message m = makeMessage();
-    inMemoryMessageProducer.send(m);
-    assertNotNull(m.getId());
-    mh.shouldReceiveMessage(payload);
-
+    super.shouldDeliverToMatchingSubscribers();
   }
 
+  @Override
   @Test
   public void shouldSetIdWithinTransaction() {
-    Message m = makeMessage();
-    eventuateTransactionTemplate.executeInTransaction(() -> {
-      inMemoryMessageProducer.send(m);
-      assertNotNull(m.getId());
-      return null;
-    });
+    super.shouldSetIdWithinTransaction();
   }
 
+  @Override
   @Test
   public void shouldDeliverToWildcardSubscribers() {
-
-    inMemoryMessageConsumer.subscribe(subscriberId, Collections.singleton("*"), mh);
-
-    Message m = makeMessage();
-
-    inMemoryMessageProducer.send(m);
-
-    mh.shouldReceiveMessage(payload);
-
+    super.shouldDeliverToWildcardSubscribers();
   }
 
-  private Message makeMessage() {
-    return MessageBuilder.withPayload(payload).withHeader(Message.DESTINATION, destination).withHeader(Message.ID, "message-id").build();
+  @Override
+  @Test
+  public void shouldReceiveMessageAfterTransaction() {
+    super.shouldReceiveMessageAfterTransaction();
   }
 
+  @Override
+  @Test
+  public void shouldNotReceiveMessageBeforeTransaction() {
+    super.shouldNotReceiveMessageBeforeTransaction();
+  }
+
+  @Override
+  @Test
+  public void shouldNotReceiveMessageAfterTransactionRollback() {
+    super.shouldNotReceiveMessageAfterTransactionRollback();
+  }
 }
