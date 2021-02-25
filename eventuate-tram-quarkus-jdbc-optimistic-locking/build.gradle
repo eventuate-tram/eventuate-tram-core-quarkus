@@ -9,6 +9,9 @@ apply plugin: PublicModulePlugin
 
 dependencies {
     compile project(":eventuate-tram-quarkus-consumer-common")
+
+    compile "io.eventuate.tram.core:eventuate-tram-optimistic-locking-common-test:$eventuateTramVersion"
+
     compile "io.eventuate.common:eventuate-common-quarkus-jdbc:$eventuateCommonQuarkusVersion"
     compile "io.quarkus:quarkus-smallrye-fault-tolerance"
     compile 'io.quarkus:quarkus-hibernate-orm'

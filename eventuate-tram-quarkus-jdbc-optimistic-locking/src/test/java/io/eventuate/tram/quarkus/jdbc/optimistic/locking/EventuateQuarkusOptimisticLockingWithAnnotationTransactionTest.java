@@ -1,11 +1,12 @@
 package io.eventuate.tram.quarkus.jdbc.optimistic.locking;
 
+import io.eventuate.tram.jdbc.optimistic.locking.common.test.AbstractTestEntityService;
 import io.quarkus.test.junit.QuarkusTest;
 
 import javax.inject.Inject;
 
 @QuarkusTest
-public class EventuateOptimisticLockingWithAnnotationTransactionTest extends AbstractEventuateOptimisticLockingTest {
+public class EventuateQuarkusOptimisticLockingWithAnnotationTransactionTest extends AbstractEventuateQuarkusOptimisticLockingTest {
 
 
   @Inject

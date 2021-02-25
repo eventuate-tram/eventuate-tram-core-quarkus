@@ -11,7 +11,7 @@ import javax.inject.Singleton;
 public class TransactionalNoopDuplicateMessageDetectorConfiguration {
 
   @Singleton
-  @IfBuildProperty(name = "transactional.noop.duplicate.message.detector.factory.enabled", stringValue = "true")
+  @IfBuildProperty(name = "transactional.noop.duplicate.message.detector.configuration.enabled", stringValue = "true")
   public DuplicateMessageDetector duplicateMessageDetector(EventuateTransactionTemplate eventuateTransactionTemplate) {
     return new TransactionalNoopDuplicateMessageDetector(eventuateTransactionTemplate);
   }

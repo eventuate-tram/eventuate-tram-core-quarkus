@@ -16,7 +16,7 @@ import java.util.Optional;
 public class TramConsumerJdbcConfiguration {
 
   @Singleton
-  @UnlessBuildProperty(name = "transactional.noop.duplicate.message.detector.factory.enabled", stringValue = "true", enableIfMissing = true)
+  @UnlessBuildProperty(name = "transactional.noop.duplicate.message.detector.configuration.enabled", stringValue = "true", enableIfMissing = true)
   public DuplicateMessageDetector duplicateMessageDetector(@ConfigProperty(name = "eventuateDatabase") String dbName,
                                                            EventuateSchema eventuateSchema,
                                                            SqlDialectSelector sqlDialectSelector,
