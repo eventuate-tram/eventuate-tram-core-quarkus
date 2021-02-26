@@ -1,6 +1,8 @@
 include 'eventuate-tram-quarkus-consumer-common'
 include 'eventuate-tram-quarkus-consumer-kafka'
 include 'eventuate-tram-quarkus-consumer-jdbc'
+include 'eventuate-tram-quarkus-consumer-jdbc-transactional-noop-duplicate-message-detector-test'
+include 'eventuate-tram-quarkus-jdbc-optimistic-locking'
 include 'eventuate-tram-quarkus-jdbc-kafka'
 include 'eventuate-tram-quarkus-messaging'
 include 'eventuate-tram-quarkus-messaging-producer-common'

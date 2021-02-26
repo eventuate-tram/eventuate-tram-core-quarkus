@@ -1,0 +1,14 @@
+plugins {
+    id "io.quarkus" version "${quarkusVersion}"
+    id 'org.kordamp.gradle.jandex' version '0.6.0'
+}
+
+dependencies {
+    compile project(":eventuate-tram-quarkus-consumer-jdbc")
+
+    testCompile 'io.quarkus:quarkus-junit5'
+}
+
+test {
+    useJUnitPlatform()
+}
