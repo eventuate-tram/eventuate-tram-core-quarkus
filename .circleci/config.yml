@@ -49,5 +49,7 @@ workflows:
     jobs:
       - build-and-test-all
       - deploy-artifacts:
+          context:
+            - publish
           requires:
             - build-and-test-all
