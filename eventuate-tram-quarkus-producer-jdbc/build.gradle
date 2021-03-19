@@ -3,7 +3,6 @@ plugins {
     id 'org.kordamp.gradle.jandex' version '0.6.0'
 }
 
-apply plugin: PublicModulePlugin
 
 dependencies {
     compile project(":eventuate-tram-quarkus-messaging")
