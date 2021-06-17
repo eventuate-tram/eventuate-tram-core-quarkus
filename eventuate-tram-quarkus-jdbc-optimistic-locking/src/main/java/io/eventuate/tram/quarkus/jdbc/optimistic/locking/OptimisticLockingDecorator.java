@@ -3,7 +3,7 @@ package io.eventuate.tram.quarkus.jdbc.optimistic.locking;
 import io.eventuate.common.jdbc.EventuateTransactionTemplate;
 import io.eventuate.tram.consumer.common.MessageHandlerDecorator;
 import io.eventuate.tram.consumer.common.MessageHandlerDecoratorChain;
-import io.eventuate.tram.consumer.common.SubscriberIdAndMessage;
+import io.eventuate.tram.messaging.common.SubscriberIdAndMessage;
 import org.eclipse.microprofile.faulttolerance.Retry;
 
 import javax.inject.Inject;
