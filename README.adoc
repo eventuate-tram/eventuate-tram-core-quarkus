@@ -1,0 +1,30 @@
+
+= Eventuate Tram for Quarkus
+
+This is the Quarkus version of https://github.com/eventuate-tram/eventuate-tram-core[Eventuate Tram].
+
+Eventuate Tram is a platform that solves the distributed data management problems inherent in a http://microservices.io/patterns/microservices.html[microservice architecture].
+
+It implements numerous distributed data management patterns including https://eventuate.io/post/eventuate/2020/02/24/why-eventuate.html[Sagas and CQRS].
+
+A companion framework is https://github.com/eventuate-tram/eventuate-tram-sagas-quarkus[Eventuate Tram Sagas for Quarkus], which implements http://microservices.io/patterns/data/saga.html[orchestration-based sagas].
+
+== Latest version
+
+[cols="a,a"]
+|===
+| Eventuate Tram for Quarkus
+| image::https://img.shields.io/maven-central/v/io.eventuate.tram.core/eventuate-tram-quarkus-bom[link="https://search.maven.org/artifact/io.eventuate.tram.core/eventuate-tram-bom"]
+|===
+
+== Example applications
+
+There are the following example applications:
+
+* https://github.com/eventuate-examples/eventuate-tram-examples-quarkus-customers-and-orders[Eventuate Tram Customers and Orders] - demonstrates how to maintain data consistency in an Quarkus, JPA-based microservice architecture using http://microservices.io/patterns/data/saga.html[choreography-based sagas].
+
+* https://github.com/eventuate-examples/eventuate-tram-sagas-quarkus-examples-customers-and-orders[Eventuate Tram Sagas Customers and Orders] - demonstrates how to maintain data consistency in an Quarkus, JPA-based microservice architecture using http://microservices.io/patterns/data/saga.html[orchestration-based sagas].
+
+== Getting started
+
+Please see the https://eventuate.io/docs/manual/eventuate-tram/latest/getting-started-eventuate-tram.html#getting-started[getting started guide].
