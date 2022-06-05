@@ -1,38 +1,11 @@
-version: 2
-jobs:
-  build-and-test-all:
-    machine: true
-    working_directory: ~/eventuate-tram-core-quarkus
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - eventuate-tram-core-quarkus-{{ checksum "gradle.properties" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
-            - eventuate-tram-core-quarkus-
-      - run: TERM=dumb ./gradlew testClasses aggregateJavaDocs
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: eventuate-tram-core-quarkus-{{ checksum "gradle.properties" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
-      - run: TERM=dumb ./build-and-test-all.sh
-      - run:
-         name: Save test results
-         command: ./.circleci/save-containers-and-tests.sh
-         when: always
-      - store_test_results:
-          path: ~/junit
-      - store_artifacts:
-          path: ~/junit
-      - store_artifacts:
-          path: ~/container-logs
-      - run:
-          name: Publish artifacts
-          command: |
-            TERM=dumb ./deploy-artifacts.sh
+version: 2.1
+orbs:
+  eventuate-gradle-build-and-test: "eventuate_io/eventuate-gradle-build-and-test@0.1.0"
 workflows:
   version: 2
   build-test-and-deploy:
     jobs:
-      - build-and-test-all:
+      - eventuate-gradle-build-and-test/build-and-test:
+          script: ./.circleci/build-and-deploy.sh
           context:
             - publish
