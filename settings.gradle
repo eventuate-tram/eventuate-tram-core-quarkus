@@ -1,3 +1,5 @@
+rootProject.name="eventuate-tram-core-quarkus"
+
 include 'eventuate-tram-quarkus-consumer-common'
 include 'eventuate-tram-quarkus-consumer-kafka'
 include 'eventuate-tram-quarkus-consumer-jdbc'
