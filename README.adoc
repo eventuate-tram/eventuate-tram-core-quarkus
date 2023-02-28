@@ -29,7 +29,7 @@ There are the following example applications:
 
 = An Eventuate project
 
-<img class="img-responsive" src="https://eventuate.io/i/logo.gif">
+image::https://eventuate.io/i/logo.gif[]
 
 This project is part of http://eventuate.io[Eventuate], which is a microservices collaboration platform.
 
