@@ -27,4 +27,10 @@ There are the following example applications:
 
 == Getting started
 
+= An Eventuate project
+
+<img class="img-responsive" src="https://eventuate.io/i/logo.gif">
+
+This project is part of http://eventuate.io[Eventuate], which is a microservices collaboration platform.
+
 Please see the https://eventuate.io/docs/manual/eventuate-tram/latest/getting-started-eventuate-tram.html#getting-started[getting started guide].
