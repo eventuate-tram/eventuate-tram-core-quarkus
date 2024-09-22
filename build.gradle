@@ -41,7 +41,8 @@ allprojects {
           api 'io.quarkus.arc:arc'
           api 'io.quarkus:quarkus-arc-deployment'
 
-          implementation enforcedPlatform("io.quarkus:quarkus-bom:${quarkusVersion}")
+          implementation platform("io.quarkus:quarkus-bom:${quarkusVersion}")
+          testImplementation enforcedPlatform("io.quarkus:quarkus-bom:${quarkusVersion}")
       }
     }
 }
