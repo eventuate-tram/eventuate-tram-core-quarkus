@@ -5,13 +5,13 @@ plugins {
 
 
 dependencies {
-    compile "io.eventuate.tram.core:eventuate-tram-consumer-jdbc:$eventuateTramVersion"
+    api "io.eventuate.tram.core:eventuate-tram-consumer-jdbc:$eventuateTramVersion"
 
-    compile "io.eventuate.common:eventuate-common-quarkus-jdbc:$eventuateCommonQuarkusVersion"
+    api "io.eventuate.common:eventuate-common-quarkus-jdbc:$eventuateCommonQuarkusVersion"
 
-    testCompile "io.eventuate.common:eventuate-common-quarkus-jdbc-test-configuration:$eventuateCommonQuarkusVersion"
+    testImplementation "io.eventuate.common:eventuate-common-quarkus-jdbc-test-configuration:$eventuateCommonQuarkusVersion"
 
-    testCompile 'io.quarkus:quarkus-junit5'
+    testImplementation 'io.quarkus:quarkus-junit5'
 }
 
 test {

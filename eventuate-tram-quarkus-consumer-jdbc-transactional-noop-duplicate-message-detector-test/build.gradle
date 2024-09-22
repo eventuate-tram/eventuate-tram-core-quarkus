@@ -4,9 +4,9 @@ plugins {
 }
 
 dependencies {
-    compile project(":eventuate-tram-quarkus-consumer-jdbc")
+    api project(":eventuate-tram-quarkus-consumer-jdbc")
 
-    testCompile 'io.quarkus:quarkus-junit5'
+    testImplementation 'io.quarkus:quarkus-junit5'
 }
 
 test {

@@ -7,16 +7,16 @@ plugins {
 
 
 dependencies {
-    compile project(":eventuate-tram-quarkus-consumer-common")
+    api project(":eventuate-tram-quarkus-consumer-common")
 
-    compile "io.eventuate.tram.core:eventuate-tram-optimistic-locking-common-test:$eventuateTramVersion"
+    api "io.eventuate.tram.core:eventuate-tram-optimistic-locking-common-test:$eventuateTramVersion"
 
-    compile "io.eventuate.common:eventuate-common-quarkus-jdbc:$eventuateCommonQuarkusVersion"
-    compile "io.quarkus:quarkus-smallrye-fault-tolerance"
-    compile 'io.quarkus:quarkus-hibernate-orm'
+    api "io.eventuate.common:eventuate-common-quarkus-jdbc:$eventuateCommonQuarkusVersion"
+    api "io.quarkus:quarkus-smallrye-fault-tolerance"
+    api 'io.quarkus:quarkus-hibernate-orm'
 
-    testCompile "io.eventuate.common:eventuate-common-quarkus-jdbc-test-configuration:$eventuateCommonQuarkusVersion"
-    testCompile 'io.quarkus:quarkus-junit5'
+    testImplementation "io.eventuate.common:eventuate-common-quarkus-jdbc-test-configuration:$eventuateCommonQuarkusVersion"
+    testImplementation 'io.quarkus:quarkus-junit5'
 }
 
 test {

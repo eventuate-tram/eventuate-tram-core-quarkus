@@ -5,12 +5,12 @@ plugins {
 
 
 dependencies {
-    compile project(":eventuate-tram-quarkus-messaging")
-    compile project(":eventuate-tram-quarkus-messaging-producer-common")
+    api project(":eventuate-tram-quarkus-messaging")
+    api project(":eventuate-tram-quarkus-messaging-producer-common")
 
-    compile "io.eventuate.tram.core:eventuate-tram-producer-jdbc:$eventuateTramVersion"
+    api "io.eventuate.tram.core:eventuate-tram-producer-jdbc:$eventuateTramVersion"
 
-    compile "io.eventuate.common:eventuate-common-quarkus-id:$eventuateCommonQuarkusVersion"
-    compile "io.eventuate.common:eventuate-common-quarkus-jdbc:$eventuateCommonQuarkusVersion"
+    api "io.eventuate.common:eventuate-common-quarkus-id:$eventuateCommonQuarkusVersion"
+    api "io.eventuate.common:eventuate-common-quarkus-jdbc:$eventuateCommonQuarkusVersion"
 }
 

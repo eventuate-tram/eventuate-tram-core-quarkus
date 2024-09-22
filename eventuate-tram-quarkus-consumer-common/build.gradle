@@ -5,5 +5,5 @@ plugins {
 
 
 dependencies {
-    compile "io.eventuate.tram.core:eventuate-tram-consumer-common:$eventuateTramVersion"
+    api "io.eventuate.tram.core:eventuate-tram-consumer-common:$eventuateTramVersion"
 }

@@ -5,10 +5,10 @@ plugins {
 
 
 dependencies {
-    compile project(":eventuate-tram-quarkus-consumer-common")
-    compile project(":eventuate-tram-quarkus-messaging")
+    api project(":eventuate-tram-quarkus-consumer-common")
+    api project(":eventuate-tram-quarkus-messaging")
 
-    compile "io.eventuate.tram.core:eventuate-tram-consumer-kafka:$eventuateTramVersion"
+    api "io.eventuate.tram.core:eventuate-tram-consumer-kafka:$eventuateTramVersion"
 
-    compile "io.eventuate.messaging.kafka:eventuate-messaging-kafka-quarkus-consumer:$eventuateMessagingKafkaQuarkusVersion"
+    api "io.eventuate.messaging.kafka:eventuate-messaging-kafka-quarkus-consumer:$eventuateMessagingKafkaQuarkusVersion"
 }

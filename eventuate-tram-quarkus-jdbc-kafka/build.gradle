@@ -1,9 +1,9 @@
 
 dependencies {
-    compile "io.eventuate.messaging.kafka:eventuate-messaging-kafka-quarkus-consumer:$eventuateMessagingKafkaQuarkusVersion"
+    api "io.eventuate.messaging.kafka:eventuate-messaging-kafka-quarkus-consumer:$eventuateMessagingKafkaQuarkusVersion"
 
-    compile project(":eventuate-tram-quarkus-producer-jdbc")
-    compile project(":eventuate-tram-quarkus-consumer-common")
-    compile project(":eventuate-tram-quarkus-consumer-jdbc")
-    compile project(":eventuate-tram-quarkus-consumer-kafka")
+    api project(":eventuate-tram-quarkus-producer-jdbc")
+    api project(":eventuate-tram-quarkus-consumer-common")
+    api project(":eventuate-tram-quarkus-consumer-jdbc")
+    api project(":eventuate-tram-quarkus-consumer-kafka")
 }
